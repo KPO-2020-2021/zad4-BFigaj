@@ -1,12 +1,10 @@
-#ifndef PROSTOPADLOSCIAN_HH
-#define PROSTOPADLOSCIAN_HH
+#ifndef GRANIASTOSLUP6_HH
+#define GRANIASTOSLUP6_HH
+
 
 #include <iostream>
 #include "BrylaGeometryczna.hh"
 
-#define X_bok 100
-#define Y_bok 50
-#define Z_bok 50
 /*!
  *  \file 
  *  \brief Ten plik zawiera diefinicje klasy Prostopadłościan
@@ -16,12 +14,14 @@
  *  dodatkowo przetrzymywana jest Macierz3x3 do operacji takich jak
  *  rotacja
  */
-class Prostopadloscian:public BrylaGeometryczna{
+class Graniastoslup6:public BrylaGeometryczna{
   Wektor3D Polozenie;
   double KatOrientacji_stopnie;
+  
   public:
   Wektor3D TransfDoUklWspRodzica(const Wektor3D& Wierz)const;
-  Wektor3D& polozenie(const Wektor3D polozenieD);
+  Wektor3D& polozenie(int index,const Wektor3D polozenieD);
 };
+
 
 #endif

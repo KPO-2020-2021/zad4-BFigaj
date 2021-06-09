@@ -56,6 +56,7 @@ class Wektor {
    }
    Wektor operator+ (Wektor vec) const;
    Wektor operator- (Wektor vec) const;
+   Wektor operator* (Wektor vec) const;
    bool operator== (Wektor vec) const;   
 };
 
@@ -84,6 +85,18 @@ Wektor<Wymiar> Wektor<Wymiar>::operator- (Wektor<Wymiar> vec) const
 }
 
 template <int Wymiar>
+Wektor<Wymiar> Wektor<Wymiar>::operator* (Wektor<Wymiar> vec) const
+{
+  int i;
+  Wektor<Wymiar> newvec;
+  for(i=0;i<Wymiar;++i)
+  {
+    newvec._Wsp[i]=vec._Wsp[i]*this->_Wsp[i];
+  }
+  return newvec;
+}
+
+template <int Wymiar>
 bool Wektor<Wymiar>::operator== (Wektor<Wymiar> vec) const
 {
   int i;
@@ -96,13 +109,14 @@ bool Wektor<Wymiar>::operator== (Wektor<Wymiar> vec) const
 }
 
 /*!
- * \brief Przeciążenie dla wyjścia musi także być szablonem
+ * \brief Przeciążenie jako szablon operatora >>
  *
- * To przeciazenie trzeba opisac. Co ono robi. Jaki format
- * danych akceptuje. Jakie jest znaczenie parametrow itd.
- * Szczegoly dotyczace zalecen realizacji opisow mozna
- * znalezc w pliku:
- *    ~bk/edu/kpo/zalecenia.txt 
+ * Wypisuje elementy skladowe wektora
+ * Przyjmuje:
+ *  \param[in] Strm& referencje do strumienia gdzie chcemy wypisywac
+ *  \param[in] Wek& referencje do szablonu wektora o zadanym wymiarze
+ *  Zwraca:
+ *  \retval Strumien wyjsciowy
  */
 template <int Wymiar>
 inline
@@ -119,13 +133,14 @@ std::istream& operator >> (std::istream &Strm, Wektor<Wymiar> &Wek)
 }
 
 /*!
- * \brief Przeciążenie dla wejścia musi także być szablonem
- * 
- * To przeciazenie trzeba opisac. Co ono robi. Jaki format
- * danych akceptuje. Jakie jest znaczenie parametrow itd.
- * Szczegoly dotyczace zalecen realizacji opisow mozna
- * znalezc w pliku:
- *    ~bk/edu/kpo/zalecenia.txt 
+ * \brief Przeciążenie jako szablon operatora >>
+ *
+ * Wczytuje elementy składowe wektora ze strumienia
+ * Przyjmuje:
+ *  \param[in] Strm& referencje do strumienia gdzie chcemy wczytywac
+ *  \param[in] Wek& referencje do szablonu wektora o zadanym wymiarze
+ *  Zwraca:
+ *  \retval Strumien wejsciowy
  */
 template <int Wymiar>
 inline
@@ -136,6 +151,7 @@ std::ostream& operator << (std::ostream &Strm, const Wektor<Wymiar> &Wek)
   while(i!=Wymiar)
   {
     Strm << Wek[i];
+    Strm << " ";
     i=i+1;
   }
   return Strm;  
